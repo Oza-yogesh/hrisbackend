@@ -9,6 +9,7 @@ const corsSetup = require("./middlewares/corsSetup");
 const databaseConfiguration = require("./middlewares/databaseConfiguration");
 const publicRoutes = require("./routes/publicRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
+const { validateToken } = require("./middlewares/validateToken");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/api/public", publicRoutes);
 app.use("/api/private", protectedRoutes);

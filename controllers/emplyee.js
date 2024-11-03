@@ -106,9 +106,61 @@ const getEmployeeDetailsById = async (req, res) => {
   }
 };
 
+const updateEmployee = async (req, res) => {
+  const employeeId = req.params.id;
+  const updateData = req.body;
+
+  try {
+    // Check if a profile photo was uploaded
+    if (req.file) {
+      // Add the path of the uploaded profile photo to the update data
+      updateData.profilePhoto = req.file.path;
+    }
+
+    // Find employee by ID and update with the provided data
+    const updatedEmployee = await User.findByIdAndUpdate(
+      employeeId,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    res.status(200).json({
+      message: "Employee details updated successfully",
+      data: updatedEmployee,
+      profilePhotoPath: req.file ? req.file.path : null, // Send the profile photo path in the response
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating employee details", error });
+  }
+};
+
+// Controller to delete employee by ID
+const deleteEmployee = async (req, res) => {
+  const employeeId = req.params.id;
+
+  try {
+    // Find employee by ID and delete
+    const deletedEmployee = await User.findByIdAndDelete(employeeId);
+
+    if (!deletedEmployee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    res.status(200).json({ message: "Employee deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting employee", error });
+  }
+};
+
 module.exports = {
   OnBoardUser,
   setPassword,
   getEmployeeDetails,
   getEmployeeDetailsById,
+  updateEmployee,
+  deleteEmployee,
 };

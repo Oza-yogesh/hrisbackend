@@ -7,7 +7,9 @@ const generateToken = async (payload) => {
 };
 
 const validateToken = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token_data = req.headers.authorization;
+  const token = token_data.split(" ")[1];
+  console.log(req.headers.authorization);
 
   if (!token) {
     return res.status(401).json("Unauthorized. No token provided");

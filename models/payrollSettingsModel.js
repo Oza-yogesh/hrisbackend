@@ -5,6 +5,7 @@ const payrollSettingsSchema = new mongoose.Schema({
   payCycle: { type: String },
   hasPF: { type: Boolean },
   employeeContributionPF: { type: Number },
+  basicSalaryPercentage: { type: Number },
   pfCeiling: { type: Number },
   hasESI: { type: Boolean },
   deductProfessionalTax: { type: Boolean },
