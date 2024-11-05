@@ -35,11 +35,9 @@ router.post(
 
       // Get the file name of the uploaded file
       const filename = req.file.filename; // Correctly get the uploaded file's name
-      const localhost =
-        process.env.BACK_END_BASE_URL || "http://localhost:3000"; // Fallback to localhost:3000 if the environment variable is not set
 
       // Construct the full URL to access the uploaded profile photo
-      const profilePhotoLink = `${localhost}/public/profilePhoto/${filename}`; // Add a slash before filename
+      const profilePhotoLink = `${process.env.BACK_END_BASE_URL}/public/profilePhoto/${filename}`; // Add a slash before filename
 
       console.log(profilePhotoLink);
 
