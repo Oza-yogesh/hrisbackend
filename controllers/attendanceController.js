@@ -2,7 +2,7 @@ const attendanceModel = require("../models/attendanceModel");
 
 // Clock-in function
 const clockIn = async (req, res) => {
-  const { _id } = req.user; // Assuming req.user contains the authenticated user ID
+  const { _id } = req.user;
   const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
 
   try {
