@@ -8,10 +8,10 @@ const signupUser = async (req, res) => {
     // Check if the default user role exists
     let userRole = await Role.findOne({ name: 'user' });
     
-    // If it doesn't exist, create it
+   
     if (!userRole) {
       userRole = await Role.create({ name: 'user', permissions: [] });
-      console.log("Default user role created!");
+     
     }
 
     const salt = await bcrypt.genSalt(10);
