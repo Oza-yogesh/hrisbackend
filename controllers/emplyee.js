@@ -8,7 +8,7 @@ const {
   sendOtpSms,
 } = require("../middlewares/OtpMethods");
 
-const OnBoardUser = async (req, res) => {
+const    OnBoardUser = async (req, res) => {
   try {
     const { email, firstName, phoneNumber } = req.body;
 
