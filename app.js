@@ -10,6 +10,8 @@ const databaseConfiguration = require("./middlewares/databaseConfiguration");
 const publicRoutes = require("./routes/publicRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
 const { validateToken } = require("./middlewares/validateToken");
+const profileEducation = require("./routes/profileEducationRoutes");
+const profileDocument = require("./routes/profileDocumentRoutes");
 
 const app = express();
 
@@ -20,14 +22,16 @@ app.use(cors(corsSetup));
 app.use(databaseConfiguration);
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use("/api/public", publicRoutes);
 app.use("/api/private", protectedRoutes);
-
+//nikita
+app.use("/api/profileEducation", profileEducation);
+app.use("/api/profileDocument",profileDocument);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
