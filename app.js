@@ -11,6 +11,7 @@ const publicRoutes = require("./routes/publicRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
 const { validateToken } = require("./middlewares/validateToken");
 const profileEducation = require("./routes/profileEducationRoutes");
+const profileDocument = require("./routes/profileDocumentRoutes");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api/public", publicRoutes);
 app.use("/api/private", protectedRoutes);
 //nikita
 app.use("/api/profileEducation", profileEducation);
+app.use("/api/profileDocument",profileDocument);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
