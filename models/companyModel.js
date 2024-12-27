@@ -1,5 +1,6 @@
 // companyModel.js
 const mongoose = require("mongoose");
+const Address = require("./addressModel");
 
 const companySchema = new mongoose.Schema({
   registeredCompanyName: { type: String, required: true },
@@ -9,14 +10,10 @@ const companySchema = new mongoose.Schema({
   website: { type: String },
   domainName: { type: String },
   industryType: { type: String },
-  registeredOffice: {
-    addressLine1: { type: String },
-    addressLine2: { type: String },
-    city: { type: String },
-    state: { type: String },
-    country: { type: String },
-    pincode: { type: String },
-  },
+
+  //Company Address
+  address: { type: mongoose.Schema.Types.ObjectId, ref: "Address" },
+
   entityType: { type: String },
   logoUrl: { type: String },
   dateOfIncorporation: { type: Date },

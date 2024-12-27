@@ -4,6 +4,7 @@ const Company = require("../models/companyModel");
 exports.createCompany = async (req, res) => {
   try {
     const company = await Company.create(req.body);
+    console.log(req.body);
     res.status(201).json(company);
   } catch (err) {
     res.status(400).json({ message: err.message });
